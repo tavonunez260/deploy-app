@@ -3,9 +3,11 @@ export const runtime = 'nodejs';
 export const fetchCache = 'force-no-store';
 export const revalidate = 0;
 
-import type { NextApiRequest, NextApiResponse } from 'next';
 import { Config } from 'sst/node/config';
+
 import { dbNow } from '@/lib/db';
+
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	const secretVal = Config.SECRET_VAL;
