@@ -6,10 +6,8 @@ import { Config } from 'sst/node/config';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-type Data = {
-	name: string;
-};
-
-export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
-	res.status(200).json({ name: 'John Doe', ...Config });
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
+	const secretVal = Config.SECRET_VAL;
+	const dbUrl = Config.DATABASE_URL;
+	res.status(200).json({ dbUrl, secretVal });
 }
