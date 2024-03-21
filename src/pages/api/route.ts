@@ -3,17 +3,29 @@ export const runtime = 'nodejs';
 export const fetchCache = 'force-no-store';
 export const revalidate = 0;
 
-import { Config } from 'sst/node/config';
-
-import { dbNow } from '@/lib/db';
+import { createUser } from '@/lib/db';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-	const secretVal = Config.SECRET_VAL;
-	const dbUrl = Config.DATABASE_URL;
+	if (req.method !== 'POST') {
+		res.setHeader('Allow', ['POST']);
+		res.status(405).end(`Method ${req.method} Not Allowed`);
+		return;
+	}
 
-	const dbResult = await dbNow();
-	const now = dbResult[0].now ?? null;
-	res.status(200).json({ dbUrl, secretVal, now });
+	const { email, firstName, lastName } = req.body;
+
+	if (!email || !firstName || !lastName) {
+		res.status(400).json({ error: 'Missing required user information' });
+		return;
+	}
+
+	try {
+		const newUser = await createUser(email, firstName, lastName);
+		res.status(201).json(newUser);
+	} catch (error) {
+		console.error('Failed to create user:', error);
+		res.status(500).json({ error: 'Failed to create user' });
+	}
 }
