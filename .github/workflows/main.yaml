@@ -5,12 +5,12 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'src/**'
-      - '*.json'
-      - '*.yaml'
-      - '*.config.js'
-      - '*.config.ts'
+#    paths:
+#      - 'src/**'
+#      - '*.json'
+#      - '*.yaml'
+#      - '*.config.js'
+#      - '*.config.ts'
 
 jobs:
   deploy:
