@@ -2,6 +2,9 @@ name: Staging Deploy via SST to AWS
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - staging
 
 jobs:
   deploy:
