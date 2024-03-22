@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "deploy": "sst deploy --stage production",
+    "deployStaging": "sst deploy --stage staging",
     "generate": "prisma migrate dev --name init",
     "migrate": "npx prisma migrate deploy"
   },
