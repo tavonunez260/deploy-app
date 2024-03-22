@@ -8,7 +8,6 @@ export function LeadCaptureForm() {
 		const formData = new FormData(e.currentTarget);
 		const formObject = Object.fromEntries(formData);
 		const jsonFormObject = JSON.stringify(formObject);
-		console.log(jsonFormObject);
 
 		const options = {
 			method: 'POST',
@@ -17,10 +16,7 @@ export function LeadCaptureForm() {
 			},
 			body: jsonFormObject
 		};
-
-		const response = await fetch('/api/submit-form', options);
-		const data = await response.json();
-		console.log(data);
+		await fetch('/api/submit-form', options);
 		setLoading(false);
 	};
 	return (
