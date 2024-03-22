@@ -30,7 +30,13 @@ jobs:
             echo "aws_secret_access_key = ${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
       - name: Set SST Config secret
         run: npx sst secrets set COMMIT_SHA '${{ github.sha }}' --stage production
+      - name: Run Prisma Migrations
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: npx prisma migrate deploy
       - name: Deploy to AWS with SST
         run: npm run deploy
+      - name: Clean up AWS Profile
+        run: rm -rf ~/.aws
 #      - run: npm ci
 #      - run: npm test

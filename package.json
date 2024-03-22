@@ -9,7 +9,7 @@
     "lint": "next lint",
     "deploy": "sst deploy --stage production",
     "generate": "prisma migrate dev --name init",
-    "migrate": "tsx src/lib/secrets.ts"
+    "migrate": "npx prisma migrate deploy"
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.9.0",
