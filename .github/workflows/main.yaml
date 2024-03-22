@@ -27,7 +27,7 @@ jobs:
             .next/
             .open-next/
             .sst/
-          key: cache-${{ hashFiles('**/package-lock.json')-${{ hashFiles('**.[jt]s', '**.[jt]sx')}}
+          key: cache-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
           restore-keys: |
             cache-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
